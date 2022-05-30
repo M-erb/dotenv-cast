@@ -2,6 +2,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
+import rollupCopy from 'rollup-plugin-copy'
 
 const commonConfig = {
   input: 'src/index.js',
@@ -38,7 +39,16 @@ esmProdConfig.output = Object.assign({}, esmConfig.output, {
 })
 esmProdConfig.plugins = [
   ...esmConfig.plugins,
-  terser()
+  terser(),
+  rollupCopy({
+    targets: [
+      {
+        src: 'src/index.d.ts',
+        dest: 'dist/typings',
+        rename: 'dotenvCast.d.ts'
+      }
+    ]
+  })
 ]
 
 // UMD config
@@ -47,9 +57,6 @@ umdConfig.output = Object.assign({}, commonConfig.output, {
   file: 'dist/umd/dotenvCast.js',
   format: 'umd'
 })
-umdConfig.plugins = [
-  ...commonConfig.plugins
-]
 
 // Production config
 const umdProdConfig = Object.assign({}, umdConfig)
