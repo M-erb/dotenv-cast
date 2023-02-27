@@ -12,9 +12,7 @@ const commonConfig = {
   },
   plugins: [
     resolve({
-      customResolveOptions: {
-        moduleDirectory: 'node_modules'
-      }
+      moduleDirectories: ['node_modules']
     }),
     babel({
       exclude: 'node_modules/**',
