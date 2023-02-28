@@ -15,7 +15,7 @@
   "scripts": {
     "start": "npm run build",
     "build": "npm run test && rollup -c",
-    "test": "jest plugin.test.js",
+    "test": "jest --findRelatedTests ./tests/env.test.js ./tests/types.test.js",
     "prepublish": "npm run test && rollup -c --silent"
   },
   "keywords": [
