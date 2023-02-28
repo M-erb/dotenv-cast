@@ -208,10 +208,10 @@ test('Cast JSON to JS Objects', () => {
   expect(env.json('JSON_NO_EXIST', { obj: 'hey look! default' })).toEqual({ obj: 'hey look! default' })
 
   // not JSON with default
-  expect(() => env.json('NUM', { obj: 'hey look! default' })).toThrow('is invalid JSON')
+  expect(() => env.json('NUM', { obj: 'hey look! default' })).toThrow('is invalid JSON or did not parse to an Object')
 
   // not JSON with no default
-  expect(() => env.json('NUM')).toThrow('is invalid JSON')
+  expect(() => env.json('NUM')).toThrow('is invalid JSON or did not parse to an Object')
 })
 
 test('Cast Arrays', () => {
