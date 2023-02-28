@@ -2,6 +2,7 @@ import string from './string-cast.js'
 import num from './number-cast.js'
 import int from './integer-cast.js'
 import float from './float-cast.js'
+import bool from './boolean-cast.js'
 
 const envs = process.env
 
@@ -10,13 +11,7 @@ const utils = {
   num,
   int,
   float,
-
-  bool (key, defaultValue) {
-    if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue
-
-    const value = envs[key]
-    return value === 'true'
-  },
+  bool,
 
   json (key, defaultValue) {
     if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue

@@ -120,13 +120,38 @@ test('Cast Floats', () => {
 })
 
 test('Cast Booleans', () => {
+  // bool true no default
   expect(env.bool('BOOL_TRUE')).toBe(true)
+
+  // bool true default false
   expect(env.bool('BOOL_TRUE', false)).toBe(true)
+
+  // bool false no default
   expect(env.bool('BOOL_FALSE')).toBe(false)
+
+  // bool false default true
   expect(env.bool('BOOL_FALSE', true)).toBe(false)
-  expect(env.bool('BOOL_EMPTY', false)).toBe(false)
+
+  // empty with default true
+  expect(env.bool('BOOL_EMPTY', true)).toBe(false)
+
+  // no exist no default
+  expect(() => env.bool('BOOL_NO_EXIST')).toThrow('on \'process.env\' and a default value was not provided')
+
+  // no exist with default false
   expect(env.bool('BOOL_NO_EXIST', false)).toBe(false)
+
+  // no exist with default true
   expect(env.bool('BOOL_NO_EXIST', true)).toBe(true)
+
+  // no exist with default not boolean
+  expect(() => env.bool('BOOL_NO_EXIST', 'Not a boolean')).toThrow('must be a boolean and default value')
+
+  // number
+  expect(() => env.bool('NUM')).toThrow('must be a boolean')
+
+  // no exist default wrong type
+  expect(() => env.bool('BOOL_NO_EXIST', 45)).toThrow('\'defaultValue\' must be a boolean')
 })
 
 test('Cast JSON to JS Objects', () => {
