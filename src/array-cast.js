@@ -16,17 +16,6 @@ function Parser (value) {
   const result = value.split(',').map(item => item.trim())
 
   if (isValid(result)) return result
-
-  // (key, defaultValue) {
-  //   let value = envs[key]
-  //   if (value.startsWith('[') && value.endsWith(']')) {
-  //     value = value.substring(1, value.length - 1)
-  //   }
-  //   return value.split(',').map(v => {
-  //     return v.trim()
-  //   })
-  // }
-
   throw new Error('wrong type')
 }
 
