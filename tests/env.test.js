@@ -13,6 +13,9 @@ test('Cast Strings', () => {
   // env exists and a default provided
   expect(env('STRING', 'hey look!')).toBe('This is a string')
 
+  // string that is a number no default
+  expect(env('NUM')).toBe('33')
+
   // env exists and wrong default is provided
   expect(() => env('STRING', ['hey look!'])).toThrow('\'defaultValue\' must be a string')
 
@@ -38,6 +41,9 @@ test('Cast Numbers', () => {
 
   // exists and wrong default provided
   expect(() => env.num('NUM', 'hey look!')).toThrow('\'defaultValue\' must be a number')
+
+  // string provided
+  expect(() => env.num('STRING')).toThrow('must be a number')
 
   // exists and is a zero
   expect(env.num('NUM_ZERO')).toBe(0)
@@ -67,6 +73,9 @@ test('Cast Integers', () => {
 
   // float number
   expect(() => env.int('NUM_FLOAT')).toThrow('must be an integer')
+
+  // string provided
+  expect(() => env.int('STRING')).toThrow('must be an integer')
 
   // no exist float default
   expect(() => env.int('NUM_FLOAT', 34.89)).toThrow('\'defaultValue\' must be an integer')
@@ -102,6 +111,9 @@ test('Cast Floats', () => {
 
   // integer number
   expect(() => env.float('INT')).toThrow('must be a float')
+
+  // string provided
+  expect(() => env.float('STRING')).toThrow('must be a float')
 
   // no exist integer default
   expect(() => env.float('FLOAT_NO_EXIST', 34)).toThrow('\'defaultValue\' must be a float')
@@ -161,6 +173,9 @@ test('Cast Booleans', () => {
 
   // number
   expect(() => env.bool('NUM')).toThrow('must be a boolean')
+
+  // string
+  expect(() => env.bool('STRING')).toThrow('must be a boolean')
 
   // no exist default wrong type
   expect(() => env.bool('BOOL_NO_EXIST', 45)).toThrow('\'defaultValue\' must be a boolean')
