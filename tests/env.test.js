@@ -155,6 +155,7 @@ test('Cast Booleans', () => {
 })
 
 test('Cast JSON to JS Objects', () => {
+  // normal JSON
   expect(env.json('JSON')).toEqual({
     number: 5,
     person: {
@@ -166,28 +167,47 @@ test('Cast JSON to JS Objects', () => {
       ]
     }
   })
-  expect(env.json('JSON', 'hey look!')).toEqual({
-    number: 5,
-    person: {
-      name: 'Jimmy',
-      likes: [
-        'reading',
-        'long walks',
-        'beaches'
-      ]
-    }
-  })
-  expect(() => env.json('JSON_EMPTY', { obj: 'hey look!' })).toThrow()
+
+  // JSON with string default
+  expect(() => env.json('JSON', 'hey look!')).toThrow('\'defaultValue\' must be an object')
+
+  // empty JSON with obj default
+  expect(env.json('JSON_EMPTY', { obj: 'hey look!' })).toEqual({ obj: 'hey look!' })
+
+  // JSON with no props and default
   expect(env.json('JSON_EMPTY_2', { obj: 'hey look!' })).toEqual({})
+
+  // no exist with obj default
   expect(env.json('JSON_NO_EXIST', { obj: 'hey look! default' })).toEqual({ obj: 'hey look! default' })
+
+  // not JSON with default
+  expect(() => env.json('NUM', { obj: 'hey look! default' })).toThrow('is invalid JSON')
+
+  // not JSON with no default
+  expect(() => env.json('NUM')).toThrow('is invalid JSON')
 })
 
 test('Cast Arrays', () => {
+  // an array value
   expect(env.array('ARRAY')).toEqual(['value1', 'value2', 'value3'])
+
+  // array with default array
   expect(env.array('ARRAY', ['default_0', 'default_1'])).toEqual(['value1', 'value2', 'value3'])
+
+  // array2 with quotes and default array
   expect(env.array('ARRAY_2', ['value1', 'value2', 'value3'])).toEqual(['"value1"', '"value2"', '"value3"'])
-  expect(env.array('ARRAY_EMPTY', ['default_0', 'default_1'])).toEqual([''])
+
+  // empty string with default
+  expect(env.array('ARRAY_EMPTY', ['default_0', 'default_1'])).toEqual(['default_0', 'default_1'])
+
+  // empty string no default
+  expect(() => env.array('ARRAY_EMPTY')).toThrow('\'defaultValue\' must be an array')
+
+  // no exist with default
   expect(env.array('ARRAY_NO_EXIST', ['default_0', 'default_1'])).toEqual(['default_0', 'default_1'])
+
+  // no exist no default
+  expect(() => env.array('ARRAY_NO_EXIST')).toThrow('on \'process.env\' and a default value was not provided')
 })
 
 test('Cast Dates', () => {

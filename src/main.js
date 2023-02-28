@@ -3,6 +3,8 @@ import num from './number-cast.js'
 import int from './integer-cast.js'
 import float from './float-cast.js'
 import bool from './boolean-cast.js'
+import json from './json-cast.js'
+import array from './array-cast.js'
 
 const envs = process.env
 
@@ -12,31 +14,8 @@ const utils = {
   int,
   float,
   bool,
-
-  json (key, defaultValue) {
-    if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue
-
-    const value = envs[key]
-    try {
-      return JSON.parse(value)
-    } catch (error) {
-      throw new Error(`Invalid json environment variable ${key}: ${error.message}`)
-    }
-  },
-
-  array (key, defaultValue) {
-    if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue
-
-    let value = envs[key]
-
-    if (value.startsWith('[') && value.endsWith(']')) {
-      value = value.substring(1, value.length - 1)
-    }
-
-    return value.split(',').map(v => {
-      return v.trim()
-    })
-  },
+  json,
+  array,
 
   date (key, defaultValue) {
     if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue
