@@ -45,11 +45,17 @@ test('Cast Numbers', () => {
   // no exist and default is zero
   expect(env.num('NUM_NO_EXIST', 0)).toBe(0)
 
+  // no exist and default is an integer
+  expect(env.num('NUM_NO_EXIST', 358)).toBe(358)
+
+  // no exist and default is a float
+  expect(env.num('NUM_NO_EXIST', 358.56)).toBe(358.56)
+
   // empty string and default is zero
   expect(env.num('NUM_EMPTY', 0)).toBe(0)
 
   // empty string and no default
-  expect(() => env.num('NUM_EMPTY')).toThrow('must be a number and default value')
+  expect(() => env.num('NUM_EMPTY')).toThrow('\'defaultValue\' must be a number')
 
   // no exist and wrong default
   expect(() => env.num('NUM_NO_EXIST', [44])).toThrow('\'defaultValue\' must be a number')
@@ -60,7 +66,7 @@ test('Cast Integers', () => {
   expect(env.int('INT')).toBe(33)
 
   // float number
-  expect(() => env.int('NUM_FLOAT')).toThrow('must be an integer and')
+  expect(() => env.int('NUM_FLOAT')).toThrow('must be an integer')
 
   // no exist float default
   expect(() => env.int('NUM_FLOAT', 34.89)).toThrow('\'defaultValue\' must be an integer')
@@ -74,6 +80,9 @@ test('Cast Integers', () => {
   // no exist and default is zero
   expect(env.int('INT_NO_EXIST', 0)).toBe(0)
 
+  // no exist and no default
+  expect(() => env.int('INT_NO_EXIST')).toThrow('on \'process.env\' and a default value was not provided')
+
   // empty string and default is zero
   expect(env.int('INT_EMPTY', 0)).toBe(0)
 
@@ -81,7 +90,7 @@ test('Cast Integers', () => {
   expect(env.int('INT_EMPTY', 3994)).toBe(3994)
 
   // empty string and no default
-  expect(() => env.int('INT_EMPTY')).toThrow('must be an integer and default value')
+  expect(() => env.int('INT_EMPTY')).toThrow('\'defaultValue\' must be an integer')
 
   // no exist and wrong default
   expect(() => env.int('INT_NO_EXIST', [44])).toThrow('\'defaultValue\' must be an integer')
@@ -92,7 +101,7 @@ test('Cast Floats', () => {
   expect(env.float('FLOAT')).toBe(22.505000005)
 
   // integer number
-  expect(() => env.float('INT')).toThrow('must be a float and default')
+  expect(() => env.float('INT')).toThrow('must be a float')
 
   // no exist integer default
   expect(() => env.float('FLOAT_NO_EXIST', 34)).toThrow('\'defaultValue\' must be a float')
@@ -101,10 +110,13 @@ test('Cast Floats', () => {
   expect(() => env.float('FLOAT', 'hey look!')).toThrow('\'defaultValue\' must be a float')
 
   // exists and is a zero
-  expect(() => env.float('INT_ZERO')).toThrow('must be a float and default')
+  expect(() => env.float('INT_ZERO')).toThrow('must be a float')
 
   // no exist and default is zero
   expect(() => env.float('FLOAT_NO_EXIST', 0)).toThrow('\'defaultValue\' must be a float')
+
+  // no exist and no default
+  expect(() => env.float('FLOAT_NO_EXIST')).toThrow('on \'process.env\' and a default value was not provided')
 
   // empty string and default is zero
   expect(() => env.float('FLOAT_EMPTY', 0)).toThrow('\'defaultValue\' must be a float')
@@ -113,7 +125,7 @@ test('Cast Floats', () => {
   expect(env.float('FLOAT_EMPTY', 11.49)).toBe(11.49)
 
   // empty string and no default
-  expect(() => env.float('FLOAT_EMPTY')).toThrow('must be a float and default')
+  expect(() => env.float('FLOAT_EMPTY')).toThrow('\'defaultValue\' must be a float')
 
   // no exist and wrong default
   expect(() => env.float('FLOAT_NO_EXIST', [44.34])).toThrow('\'defaultValue\' must be a float')
@@ -133,7 +145,7 @@ test('Cast Booleans', () => {
   expect(env.bool('BOOL_FALSE', true)).toBe(false)
 
   // empty with default true
-  expect(env.bool('BOOL_EMPTY', true)).toBe(false)
+  expect(env.bool('BOOL_EMPTY', true)).toBe(true)
 
   // no exist no default
   expect(() => env.bool('BOOL_NO_EXIST')).toThrow('on \'process.env\' and a default value was not provided')
@@ -145,7 +157,7 @@ test('Cast Booleans', () => {
   expect(env.bool('BOOL_NO_EXIST', true)).toBe(true)
 
   // no exist with default not boolean
-  expect(() => env.bool('BOOL_NO_EXIST', 'Not a boolean')).toThrow('must be a boolean and default value')
+  expect(() => env.bool('BOOL_NO_EXIST', 'Not a boolean')).toThrow('\'defaultValue\' must be a boolean')
 
   // number
   expect(() => env.bool('NUM')).toThrow('must be a boolean')
