@@ -2,10 +2,10 @@ import types from './types.js'
 const envs = process.env
 
 function isValid (theValue) {
-  const isNumType = types(theValue) === types.number
+  const isType = types(theValue) === types.number
   const isNotNaN = !isNaN(theValue)
   const isAnInteger = Number.isInteger(theValue)
-  return isNumType && isNotNaN && isAnInteger
+  return isType && isNotNaN && isAnInteger
 }
 
 export default (key, defaultValue) => {
