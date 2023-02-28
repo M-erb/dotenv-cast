@@ -159,7 +159,7 @@ env.json('ENV_VAR', { key: 'value' })
 ```
 
 ### Array
-Returns an Array.
+Returns an Array. Can be left blank in `.env` file, but a default value is required then.
 
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided
@@ -179,7 +179,7 @@ env.array('ENV_VAR', [1, 2, 3])
 ```
 
 ### Dates
-Returns a js Date using `new Date()`.
+Returns a js Date using `new Date()`. Can be left blank in `.env` file, but a default value is required then.
 
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided

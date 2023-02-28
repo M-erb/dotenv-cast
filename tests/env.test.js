@@ -225,9 +225,24 @@ test('Cast Arrays', () => {
 test('Cast Dates', () => {
   const dateStr = process.env.DATE_2
 
+  // date no default
   expect(env.date('DATE')).toEqual(new Date('2018/01/01'))
+
+  // date with default
   expect(env.date('DATE', new Date('1900/01/01'))).toEqual(new Date('2018/01/01'))
+
+  // date 2 with default
   expect(env.date('DATE_2', new Date('1900/01/01'))).toEqual(new Date(dateStr))
-  expect(() => env.date('DATE_EMPTY', new Date('1900/01/01'))).toThrow()
+
+  // empty with default
+  expect(env.date('DATE_EMPTY', new Date('1900/01/01'))).toEqual(new Date('1900/01/01'))
+
+  // empty with no default
+  expect(() => env.date('DATE_EMPTY')).toThrow('\'defaultValue\' must be a date')
+
+  // no exist with default
   expect(env.date('DATE_NO_EXIST', new Date('2000/01/01'))).toEqual(new Date('2000/01/01'))
+
+  // no exist with no default
+  expect(() => env.date('DATE_NO_EXIST')).toThrow('on \'process.env\' and a default value was not provided')
 })
