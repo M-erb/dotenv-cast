@@ -80,6 +80,7 @@ Throws if:
 - default is not a string if provided
 
 ```javascript
+// js
 env('ENV_VAR', 'default')
 env.string('ENV_VAR', 'default') // same as env()
 ```
@@ -92,7 +93,14 @@ Throws if:
 - 'ENV_VAR' is not a number (Integer or Float)
 - default is not a number (Integer or Float) if provided
 
+```properties
+ENV_VAR=193
+# or
+ENV_VAR=23.678
+```
+
 ```javascript
+// js
 env.num('ENV_VAR', 0)
 env.num('ENV_VAR', 25.78)
 env.num('PORT', 3030)
@@ -104,9 +112,15 @@ Returns an integer. Casts using `Number.parseInt()`. Can be left blank in `.env`
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided
 - 'ENV_VAR' is not an integer
-- default is not an integer if provided
+- default is not an integer
+
+```properties
+# .env file
+ENV_VAR=193
+```
 
 ```javascript
+// js
 env.int('ENV_VAR', 22)
 ```
 
@@ -116,9 +130,15 @@ Returns a floating point number. Casts using `Number.parseFloat()`. Can be left 
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided
 - 'ENV_VAR' is not a floating point number
-- default is not a floating point number if provided
+- default is not a floating point number
+
+```properties
+# .env file
+ENV_VAR=55.555
+```
 
 ```javascript
+// js
 env.float('ENV_VAR', 3.14)
 ```
 
@@ -127,21 +147,23 @@ Returns a boolean value of `true` or `false`. Can be left blank in `.env` file, 
 
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided
-- 'ENV_VAR' is not an accepted boolean
-- default is not an accepted boolean
+- 'ENV_VAR' is not an accepted boolean (true or false only)
+- default is not a boolean
 
 An 'accepted boolean' is 'true', 'false', or empty. Examples below:
 
 ```properties
-BOOL_VALUE=true
-BOOL_VALUE=false
+# .env file
+ENV_VAR=true
+ENV_VAR=false
 
-# will case to 'false'
-BOOL_VALUE=
+# this will throw if no default is provided
+ENV_VAR=
 ```
 
 Usage:
 ```javascript
+// js
 env.bool('ENV_VAR', true)
 env.bool('ENV_VAR', false)
 ```
@@ -152,14 +174,25 @@ Returns a JS object using `JSON.parse`. Can be left blank in `.env` file, but a 
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided
 - 'ENV_VAR' is not valid JSON
+- 'ENV_VAR' parses to something other than a JS object
 - default is not valid JSON
 
+```properties
+# .env file
+ENV_VAR={"name": "some property value"}
+ENV_VAR={"config": {"host": "localhost"}}
+
+# this will throw as it will not parse to a js object
+ENV_VAR=33
+```
+
 ```javascript
+// js
 env.json('ENV_VAR', { key: 'value' })
 ```
 
 ### Array
-Returns an Array. Can be left blank in `.env` file, but a default value is required then.
+Returns an Array of strings. If an array of other types is needed use the JSON cast, but note that it needs to be put into an object "`{}`". Can be left blank in `.env` file, but a default value is required then.
 
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided
@@ -167,26 +200,43 @@ Throws if:
 - default is not an array
 
 `.env` accepted array examples:
+
 ```properties
+# .env file
 ENV_VAR=[value1, value2, value3]
 ENV_VAR=value1,value2,value3
-ENV_VAR="value1","value2","value3" # node, this will leave all values with '"' around them. ex: ['"value1"'','"value2"'','"value3"']
+
+# NOTE: below will leave all values with '"' around them. ex: ['"value1"'','"value2"'','"value3"']
+ENV_VAR="value1","value2","value3"
+# So unless those quotes are needed in the strings, dont add them.
 ```
 
 usage:
 ```javascript
+// js
 env.array('ENV_VAR', [1, 2, 3])
 ```
 
 ### Dates
-Returns a js Date using `new Date()`. Can be left blank in `.env` file, but a default value is required then.
+Returns a js Date using `new Date()`. This only parses a string to a js date. If more date support is needed I suggest using [date-fns](https://github.com/date-fns/date-fns) - [date-fns doscs](https://date-fns.org/). Can be left blank in `.env` file, but a default value is required then.
 
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided
-- 'ENV_VAR' is not a js Date
+- 'ENV_VAR' cannot parse to a valid js Date
 - default is not a js Date
 
+```properties
+# .env file
+ENV_VAR=December 17, 1995 03:24:00
+ENV_VAR=1995-12-17T03:24:00
+ENV_VAR=02/04/2022
+
+# this will throw as it will not parse to a valid Js Date
+ENV_VAR=02-04-2022
+```
+
 ```javascript
+// js
 env.date('ENV_VAR', new Date())
 ```
 
