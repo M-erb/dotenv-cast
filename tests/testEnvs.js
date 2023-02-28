@@ -6,12 +6,20 @@ export default function () {
   process.env.STRING_2 = 'huCP1pH+spEZC/RElglVOxSeCt23/leABIasRiUGRxhkWKpcaWgIWHFdRqKCLR/ZMLG19oCPj4qj8e1Der/0cg=='
   process.env.STRING_EMPTY = ''
 
+  // NUMBERS
+  process.env.NUM = '33'
+  process.env.NUM_FLOAT = '56.89'
+  process.env.NUM_ZERO = '0'
+  process.env.NUM_EMPTY = ''
+
   // INTEGERS
   process.env.INT = '33'
+  process.env.INT_ZERO = '0'
   process.env.INT_EMPTY = ''
 
   // FLOATS
   process.env.FLOAT = '22.505000005'
+  process.env.FLOAT_ZERO = '0.0'
   process.env.FLOAT_EMPTY = ''
 
   // BOOLEANS
@@ -38,6 +46,8 @@ export default function () {
   // ARRAYS
   process.env.ARRAY = '[value1,value2,value3]'
   process.env.ARRAY_2 = '["value1","value2","value3"]'
+  process.env.ARRAY_3 = 'value1,value2,value3'
+  process.env.ARRAY_4 = '"value1","value2","value3"'
   process.env.ARRAY_EMPTY = ''
 
   // DATES

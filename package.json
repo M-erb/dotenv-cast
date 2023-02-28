@@ -1,8 +1,9 @@
 {
   "name": "dotenv-cast",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Dead simple functional dotenv varaible type caster. No dependencies. Designed to be used with dotenv.",
   "author": "merb",
+  "type": "module",
   "main": "dist/umd/dotenvCast.js",
   "module": "dist/mjs/dotenvCast.js",
   "files": [
@@ -14,7 +15,7 @@
   "scripts": {
     "start": "npm run build",
     "build": "npm run test && rollup -c",
-    "test": "jest plugin.test.js",
+    "test": "jest --findRelatedTests ./tests/env.test.js ./tests/types.test.js",
     "prepublish": "npm run test && rollup -c --silent"
   },
   "keywords": [
@@ -32,26 +33,25 @@
     "url": "git://github.com/M-erb/dotenv-cast.git"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/plugin-proposal-private-methods": "^7.17.12",
-    "@babel/plugin-transform-async-to-generator": "^7.17.12",
-    "@babel/plugin-transform-regenerator": "^7.18.0",
-    "@babel/plugin-transform-runtime": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.0",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@types/jest": "^27.5.1",
-    "jest": "^28.1.0",
-    "rollup": "^2.74.1",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "standard": "^17.0.0"
-  },
-  "standard": {
-    "ignore": [
-      "/src/index.d.ts"
-    ]
+    "@babel/core": "^7.21.0",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@babel/plugin-transform-async-to-generator": "^7.20.7",
+    "@babel/plugin-transform-regenerator": "^7.20.5",
+    "@babel/plugin-transform-runtime": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@types/jest": "^29.4.0",
+    "eslint": "^8.35.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.4.3",
+    "rollup": "^2.79.1",
+    "rollup-plugin-copy": "^3.4.0"
   }
 }

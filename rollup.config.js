@@ -1,20 +1,18 @@
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 import rollupCopy from 'rollup-plugin-copy'
 
 const commonConfig = {
-  input: 'src/index.js',
+  input: 'src/main.js',
   output: {
     name: 'dotenvCast',
     sourcemap: true
   },
   plugins: [
     resolve({
-      customResolveOptions: {
-        moduleDirectory: 'node_modules'
-      }
+      moduleDirectories: ['node_modules']
     }),
     babel({
       exclude: 'node_modules/**',
