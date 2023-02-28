@@ -1,25 +1,15 @@
+import string from './string-cast.js'
+import num from './number-cast.js'
+import int from './integer-cast.js'
+import float from './float-cast.js'
+
 const envs = process.env
 
-function env (key, defaultValue = undefined) {
-  if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue
-  const value = envs[key]
-  return value !== '' ? value : defaultValue
-}
-
 const utils = {
-  int (key, defaultValue) {
-    if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue
-
-    const value = envs[key]
-    return parseInt(value, 10)
-  },
-
-  float (key, defaultValue) {
-    if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue
-
-    const value = envs[key]
-    return parseFloat(value)
-  },
+  string,
+  num,
+  int,
+  float,
 
   bool (key, defaultValue) {
     if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue
@@ -62,6 +52,6 @@ const utils = {
   }
 }
 
-Object.assign(env, utils)
+const env = Object.assign(string, utils)
 
 export default env

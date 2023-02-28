@@ -5,7 +5,7 @@ import terser from '@rollup/plugin-terser'
 import rollupCopy from 'rollup-plugin-copy'
 
 const commonConfig = {
-  input: 'src/index.js',
+  input: 'src/main.js',
   output: {
     name: 'dotenvCast',
     sourcemap: true
