@@ -123,7 +123,7 @@ env.float('ENV_VAR', 3.14)
 ```
 
 ### Boolean
-Returns a boolean value of `true` or `false`. If key is left empty in `.env` file (example: '`BOOL_VALUE=`') then will cast as a `false` value.
+Returns a boolean value of `true` or `false`. Can be left blank in `.env` file, but a default value is required then.
 
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided
@@ -147,7 +147,7 @@ env.bool('ENV_VAR', false)
 ```
 
 ### JSON
-Returns a JS object using `JSON.parse`.
+Returns a JS object using `JSON.parse`. Can be left blank in `.env` file, but a default value is required then.
 
 Throws if:
 - 'ENV_VAR' is not found AND a default is not provided
@@ -159,9 +159,6 @@ env.json('ENV_VAR', { key: 'value' })
 ```
 
 ### Array
-`// Cast to array (syntax: ENV_VAR=[value1, value2, value3] || ENV_VAR=["value1", "value2", "value3"])
-env.array('ENV_VAR', [1, 2, 3])`
-
 Returns an Array.
 
 Throws if:
@@ -173,7 +170,7 @@ Throws if:
 ```properties
 ENV_VAR=[value1, value2, value3]
 ENV_VAR=value1,value2,value3
-ENV_VAR="value1","value2","value3"
+ENV_VAR="value1","value2","value3" # node, this will leave all values with '"' around them. ex: ['"value1"'','"value2"'','"value3"']
 ```
 
 usage:
