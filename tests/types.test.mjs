@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import types from '../src/types.js'
+import types from '../src/types.mjs'
 const string = 'A String'
 const stringEmpty = ''
 const number = 12

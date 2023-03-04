@@ -1,5 +1,5 @@
-import Handler from './Handler.js'
-import types from './types.js'
+import Handler from './Handler.mjs'
+import types from './types.mjs'
 const ERR_MESSAGE_ON_DEFAULT = '\'defaultValue\' must be an array'
 const TYPE_MESSAGE = 'must be an array'
 

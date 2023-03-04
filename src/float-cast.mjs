@@ -1,12 +1,13 @@
-import Handler from './Handler.js'
-import types from './types.js'
-const ERR_MESSAGE_ON_DEFAULT = '\'defaultValue\' must be a number'
-const TYPE_MESSAGE = 'must be a number'
+import Handler from './Handler.mjs'
+import types from './types.mjs'
+const ERR_MESSAGE_ON_DEFAULT = '\'defaultValue\' must be a float'
+const TYPE_MESSAGE = 'must be a float'
 
 function isValid (theValue) {
   const isType = types(theValue) === types.number
   const isNotNaN = !isNaN(theValue)
-  return isType && isNotNaN
+  const isAFloat = !Number.isInteger(theValue)
+  return isType && isNotNaN && isAFloat
 }
 
 function Parser (value) {

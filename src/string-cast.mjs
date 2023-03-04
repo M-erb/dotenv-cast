@@ -1,4 +1,4 @@
-import types from './types.js'
+import types from './types.mjs'
 const envs = process.env
 
 export default (key, defaultValue) => {

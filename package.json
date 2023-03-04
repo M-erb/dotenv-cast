@@ -1,11 +1,13 @@
 {
   "name": "dotenv-cast",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dead simple functional dotenv varaible type caster. No dependencies. Designed to be used with dotenv.",
   "author": "merb",
-  "type": "module",
   "main": "dist/umd/dotenvCast.js",
-  "module": "dist/mjs/dotenvCast.js",
+  "exports": {
+    "import": "./dist/mjs/dotenvCast.mjs",
+    "require": "./dist/umd/dotenvCast.cjs"
+  },
   "files": [
     "dist/umd",
     "dist/mjs",
@@ -15,7 +17,7 @@
   "scripts": {
     "start": "npm run build",
     "build": "npm run test && rollup -c",
-    "test": "jest --findRelatedTests ./tests/env.test.js ./tests/types.test.js",
+    "test": "jest",
     "prepublish": "npm run test && rollup -c --silent"
   },
   "keywords": [
@@ -34,17 +36,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-private-methods": "^7.18.6",
-    "@babel/plugin-transform-async-to-generator": "^7.20.7",
-    "@babel/plugin-transform-regenerator": "^7.20.5",
-    "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
-    "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-terser": "^0.4.0",
     "@types/jest": "^29.4.0",
+    "babel-jest": "^29.4.3",
     "eslint": "^8.35.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
